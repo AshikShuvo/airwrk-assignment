@@ -1,9 +1,6 @@
-<script setup lang="ts">
-</script>
-
 <template>
-  <h1 class="text-red-500">hello world</h1>
+  <AppContainer />
 </template>
-
-<style scoped>
-</style>
+<script setup lang="ts">
+import AppContainer from "./components/AppContainer.vue";
+</script>
