@@ -16,4 +16,8 @@
 
 import QuestionDistributionChart from "./QuestionDistributionChart.vue";
 import AnswerDistributionChart from "./AnswerDistributionChart.vue";
+import DataService from "../service/DataService.ts";
+const dataService=new DataService();
+const data = dataService.getQuestionHistory();
+console.log(data);
 </script>
