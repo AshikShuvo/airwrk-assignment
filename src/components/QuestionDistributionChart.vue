@@ -4,12 +4,27 @@
   </div>
 </template>
 <script setup lang="ts">
+const props=defineProps({
+  correctRatio:{
+    type:Array,
+    default:[]
+  },
+  wrongRatio:{
+    type:Array,
+    default:[]
+  },
+  selectQuestion:{
+    type:Function,
+    default:()=>{}
+  }
+
+})
 const options= {
   animationEnabled: true,
       theme: "light2",
       exportEnabled: true,
       title:{
-    text: "Question Answer Distribution"
+    text: "Correct and Wrong Answer Ratio"
   },
   legend: {
     cursor:"pointer",
@@ -25,36 +40,20 @@ const options= {
     name: "Correct",
     showInLegend: true,
     color: "#009933",
-    dataPoints: [
-      { label: "1", y: 48 },
-      { label: "2", y: 55 },
-      { label: "3", y: 49 },
-      { label: "4", y: 65 },
-      { label: "5", y: 48 },
-      { label: "6", y: 55 },
-      { label: "7", y: 49 },
-      { label: "8", y: 65 },
-      { label: "9", y: 49 },
-      { label: "10", y: 65 },
-    ]
+    dataPoints: props.correctRatio,
+    click: function(e:any){
+      props.selectQuestion((e.dataPoint.x as number)+1);
+    },
   },
     {
       type: "stackedColumn",
       name: "Wrong",
       showInLegend: true,
       color: "#990000",
-      dataPoints: [
-        { label: "1", y: 52 },
-        { label: "2", y: 45 },
-        { label: "3", y: 51 },
-        { label: "4", y: 35 },
-        { label: "5", y: 52 },
-        { label: "6", y: 45 },
-        { label: "7", y: 51 },
-        { label: "8", y: 35 },
-        { label: "9", y: 51 },
-        { label: "10", y: 35 },
-      ]
+      dataPoints: props.wrongRatio,
+      click: function(e:any){
+        props.selectQuestion((e.dataPoint.x as number)+1);
+      },
     }
   ]
 };
